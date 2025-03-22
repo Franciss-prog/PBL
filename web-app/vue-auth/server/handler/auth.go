@@ -88,7 +88,7 @@ func Login(c *fiber.Ctx) error {
 	if err := collection.FindOne(ctx, bson.M{"email": LoginData.Email}).Decode(&user); err != nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid email or password"})
 	}
-
+ 
 	if !authHash(LoginData.Password, user.Password) {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid email or password"})
 	}
